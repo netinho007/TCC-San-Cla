@@ -13,8 +13,19 @@ use App\Http\Middleware\LogAcessoMiddleware;
 |
 */
 
-Route::get('/', [App\Http\Controllers\Principal::class, 'principal']);
 
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'home']);
 
+Route::get('/contato', [App\Http\Controllers\ContatoController::class, 'contato']);
+
+Route::get('/serviços', [App\Http\Controllers\ServicosController::class, 'servicos']);
+
+Route::get('/sobrenos', [App\Http\Controllers\SobrenosController::class, 'sobrenos']);
+
+Route::get('/formulario', [App\Http\Controllers\FormularioController::class, 'formulario']);
+
+Route::get('/login', [App\Http\Controllers\LoginController::class, 'login']);
+
+Route::get('/cadastro', [App\Http\Controllers\CadastroController::class, 'cadastro']);
 
 

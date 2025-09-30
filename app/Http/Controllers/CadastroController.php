@@ -13,6 +13,6 @@ class CadastroController extends Controller
      */
     public function Cadastro()
         {
-            return view ('Cadastro');
+            return view ('cadastro');
         }
 }

@@ -18,7 +18,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'home']);
 
 Route::get('/contato', [App\Http\Controllers\ContatoController::class, 'contato']);
 
-Route::get('/serviços', [App\Http\Controllers\ServicosController::class, 'servicos']);
+Route::get('/servicos', [App\Http\Controllers\ServicosController::class, 'servicos']);
 
 Route::get('/sobrenos', [App\Http\Controllers\SobrenosController::class, 'sobrenos']);
 

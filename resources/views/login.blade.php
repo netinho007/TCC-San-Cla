@@ -68,7 +68,7 @@ $currentPage = 'login';
                             <i class="fas fa-sign-in-alt"></i> Entrar
                         </button>
                         <div class="register-link">
-                        <p>Não tem uma conta? <a href="cadastro.php">Cadastre-se aqui</a></p>
+                        <p>Não tem uma conta? <a href="{{url ('cadastro')}}">Cadastre-se aqui</a></p>
                     </div>
                 </div>
                     </form>

@@ -21,7 +21,7 @@ $currentPage = 'cadastro';
                 <li><a href="{{url ('sobrenos')}}">Sobre Nós</a></li>
                 <li><a href="{{url ('servicos')}}">Serviços</a></li>
                 <li><a href="{{url ('contato')}}">Contato</a></li>
-                <li><a href="{{url ('furmulario')}}">Formulário Pet</a></li>
+                <li><a href="{{url ('formulario')}}">Formulário Pet</a></li>
                 <li><a href="{{url ('login')}}">Login</a></li>
             </ul>
             <div class="hamburger">

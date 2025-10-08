@@ -40,7 +40,7 @@ $currentPage = 'index';
     <!-- carrossel Section -->
     <section class="carousel-section">
         <h2>Nossos Diferenciais</h2>
-        <div class="carousel">
+        <div class="carousel" id="home-carousel">
             <div class="carousel-container">
                 <div class="carousel-slide active">
                     <div class="slide-content">
@@ -74,7 +74,7 @@ $currentPage = 'index';
             <button class="carousel-btn prev" onclick="changeSlide(-1)">&#10094;</button>
             <button class="carousel-btn next" onclick="changeSlide(1)">&#10095;</button>
         </div>
-        <div class="carousel-dots">
+        <div class="carousel-dots" id="home-dots">
             <span class="dot active" onclick="goToSlide(1)"></span>
             <span class="dot" onclick="goToSlide(2)"></span>
             <span class="dot" onclick="goToSlide(3)"></span>

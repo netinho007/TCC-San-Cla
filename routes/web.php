@@ -28,4 +28,7 @@ Route::get('/login', [App\Http\Controllers\LoginController::class, 'login']);
 
 Route::get('/cadastro', [App\Http\Controllers\CadastroController::class, 'cadastro']);
 
+Route::get('/forgot-password', [App\Http\Controllers\ForgotPasswordController::class, 'showForgotPasswordForm']);
+Route::post('/forgot-password', [App\Http\Controllers\ForgotPasswordController::class, 'sendResetLink']);
+
 

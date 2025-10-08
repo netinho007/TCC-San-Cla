@@ -6,11 +6,18 @@ let currentTestimonialSlide = 0;
 // Função para inicializar os carrosséis
 document.addEventListener('DOMContentLoaded', function() {
     // Inicializar carrossel principal (página inicial)
-    const slides = document.querySelectorAll('.carousel-slide');
-    const dots = document.querySelectorAll('.dot');
+    const homeSlides = document.querySelectorAll('#home-carousel .carousel-slide');
+    const homeDots = document.querySelectorAll('#home-dots .dot');
     
-    if (slides.length > 0) {
-        showSlide(currentSlide);
+    if (homeSlides.length > 0) {
+        // Garantir que o primeiro slide seja visível
+        homeSlides.forEach((slide, index) => {
+            slide.classList.remove('active');
+            if (index === 0) {
+                slide.classList.add('active');
+            }
+        });
+        showSlide(0);
     }
     
     // Inicializar carrossel de serviços (página serviços)
@@ -18,7 +25,14 @@ document.addEventListener('DOMContentLoaded', function() {
     const serviceDots = document.querySelectorAll('#services-dots .dot');
     
     if (serviceSlides.length > 0) {
-        showServiceSlide(currentServiceSlide);
+        // Garantir que o primeiro slide seja visível
+        serviceSlides.forEach((slide, index) => {
+            slide.classList.remove('active');
+            if (index === 0) {
+                slide.classList.add('active');
+            }
+        });
+        showServiceSlide(0);
     }
     
     // Inicializar carrossel de depoimentos (página serviços)
@@ -26,12 +40,19 @@ document.addEventListener('DOMContentLoaded', function() {
     const testimonialDots = document.querySelectorAll('#testimonials-dots .dot');
     
     if (testimonialSlides.length > 0) {
-        showTestimonialSlide(currentTestimonialSlide);
+        // Garantir que o primeiro slide seja visível
+        testimonialSlides.forEach((slide, index) => {
+            slide.classList.remove('active');
+            if (index === 0) {
+                slide.classList.add('active');
+            }
+        });
+        showTestimonialSlide(0);
     }
     
     // Auto-play para carrosséis
     setInterval(() => {
-        if (slides.length > 0) {
+        if (homeSlides.length > 0) {
             changeSlide(1);
         }
     }, 5000);
@@ -67,12 +88,21 @@ document.addEventListener('DOMContentLoaded', function() {
             handleContactForm();
         });
     }
+    
+    // Formulário de recuperação de senha
+    const forgotPasswordForm = document.getElementById('forgotPasswordForm');
+    if (forgotPasswordForm) {
+        forgotPasswordForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            handleForgotPasswordForm();
+        });
+    }
 });
 
 // Funções para o carrossel principal
 function changeSlide(direction) {
-    const slides = document.querySelectorAll('.carousel-slide');
-    const dots = document.querySelectorAll('.dot');
+    const slides = document.querySelectorAll('#home-carousel .carousel-slide');
+    const dots = document.querySelectorAll('#home-dots .dot');
     
     if (slides.length === 0) return;
     
@@ -89,13 +119,16 @@ function changeSlide(direction) {
 }
 
 function goToSlide(n) {
-    currentSlide = n - 1;
-    changeSlide(1);
+    const slides = document.querySelectorAll('#home-carousel .carousel-slide');
+    if (slides.length === 0) return;
+    const index = Math.max(0, Math.min(slides.length - 1, n - 1));
+    currentSlide = index;
+    showSlide(currentSlide);
 }
 
 function showSlide(n) {
-    const slides = document.querySelectorAll('.carousel-slide');
-    const dots = document.querySelectorAll('.dot');
+    const slides = document.querySelectorAll('#home-carousel .carousel-slide');
+    const dots = document.querySelectorAll('#home-dots .dot');
     
     if (slides.length === 0) return;
     
@@ -140,8 +173,11 @@ function changeServiceSlide(direction) {
 }
 
 function goToServiceSlide(n) {
-    currentServiceSlide = n - 1;
-    changeServiceSlide(1);
+    const slides = document.querySelectorAll('#services-carousel .carousel-slide');
+    if (slides.length === 0) return;
+    const index = Math.max(0, Math.min(slides.length - 1, n - 1));
+    currentServiceSlide = index;
+    showServiceSlide(currentServiceSlide);
 }
 
 function showServiceSlide(n) {
@@ -191,8 +227,11 @@ function changeTestimonialSlide(direction) {
 }
 
 function goToTestimonialSlide(n) {
-    currentTestimonialSlide = n - 1;
-    changeTestimonialSlide(1);
+    const slides = document.querySelectorAll('#testimonials-carousel .carousel-slide');
+    if (slides.length === 0) return;
+    const index = Math.max(0, Math.min(slides.length - 1, n - 1));
+    currentTestimonialSlide = index;
+    showTestimonialSlide(currentTestimonialSlide);
 }
 
 function showTestimonialSlide(n) {
@@ -246,6 +285,49 @@ function handleContactForm() {
         submitBtn.textContent = originalText;
         submitBtn.disabled = false;
     }, 2000);
+}
+
+// Função para lidar com o formulário de recuperação de senha
+function handleForgotPasswordForm() {
+    const form = document.getElementById('forgotPasswordForm');
+    const email = form.querySelector('#email').value;
+    const submitBtn = form.querySelector('.forgot-password-btn');
+    const originalText = submitBtn.innerHTML;
+    
+    // Validação básica
+    if (!email || !email.includes('@')) {
+        showNotification('Digite um email válido.', 'error');
+        return;
+    }
+    
+    // Mostrar loading
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+    submitBtn.disabled = true;
+    
+    // Simular envio do formulário
+    setTimeout(() => {
+        // Simular sucesso
+        showSuccessMessage();
+        
+        // Restaurar botão
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+    }, 2000);
+}
+
+// Função para mostrar mensagem de sucesso
+function showSuccessMessage() {
+    const successMessage = document.getElementById('successMessage');
+    if (successMessage) {
+        successMessage.style.display = 'flex';
+        
+        // Fechar mensagem ao clicar fora
+        successMessage.addEventListener('click', function(e) {
+            if (e.target === successMessage) {
+                successMessage.style.display = 'none';
+            }
+        });
+    }
 }
 
 // Função para scroll suave

@@ -15,7 +15,7 @@ $currentPage = 'login';
     <!-- Header -->
     <header>
         <nav>
-            <img src="img\logo.webp" width="200px" height="50px">
+            <img src="{{ asset('img/logo.webp') }}" width="200px" height="50px" alt="Logo da Clínica">
             <ul class="nav-links">
                 <li><a href="{{url ('home')}}">Início</a></li>
                 <li><a href="{{url ('sobrenos')}}">Sobre Nós</a></li>
@@ -62,7 +62,7 @@ $currentPage = 'login';
                                 <span class="checkmark"></span>
                                 Lembrar de mim
                             </label>
-                            <a href="#" class="forgot-password">Esqueceu a senha?</a>
+                            <a href="{{url ('forgot-password')}}" class="forgot-password">Esqueceu a senha?</a>
                         </div>
                         <button type="submit" class="login-btn">
                             <i class="fas fa-sign-in-alt"></i> Entrar

@@ -15,7 +15,7 @@ $currentPage = 'sobrenos';
     <!-- Header -->
     <header>
         <nav>
-            <img src="img\logo.webp" width="200px" height="50px">
+            <img src="{{ asset('img/logo.webp') }}" width="200px" height="50px" alt="Logo da Clínica">
             <ul class="nav-links">
                 <li><a href="{{url ('home')}}">Início</a></li>
                 <li><a href="{{url ('sobrenos')}}" class="active">Sobre Nós</a></li>
@@ -45,7 +45,7 @@ $currentPage = 'sobrenos';
                     <p>A SanClá Marília é um centro veterinário com atendimento clínico, cirúrgico, internação e pronto atendimento. Temos como lema o trabalho em conjunto, garantindo o melhor tratamento ao animal, onde a união faz toda a diferença!</p>
                     <p>Localizada na cidade de Marília, a SanClá Saúde Animal tem como principal objetivo atender seus clientes em todas as áreas clínicas e necessidades de seus pets. A experiência e a qualificação de nossos profissionais, somadas a uma infraestrutura de alto padrão, garantem os melhores cuidados aos pequenos animais.</p>
                 </div>
-                <img src="img\fotodoespaco.webp"  alt="fotodoespaco" width="600px" height="400px">
+                <img src="{{ asset('img/fotodoespaco.webp') }}" alt="Foto do espaço da clínica" width="600px" height="400px">
             </div>
         </div>
     </section>

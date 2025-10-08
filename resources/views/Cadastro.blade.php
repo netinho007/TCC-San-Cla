@@ -15,7 +15,7 @@ $currentPage = 'cadastro';
     <!-- Header -->
     <header>
         <nav>
-            <img src="img\logo.webp" width="200px" height="50px">
+            <img src="{{ asset('img/logo.webp') }}" width="200px" height="50px" alt="Logo da Clínica">
             <ul class="nav-links">
                 <li><a href="{{url ('home')}}">Início</a></li>
                 <li><a href="{{url ('sobrenos')}}">Sobre Nós</a></li>

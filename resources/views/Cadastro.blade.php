@@ -230,8 +230,8 @@ $currentPage = 'cadastro';
                 </div>
                 <div class="footer-section">
                     <h3>Contato</h3>
-                    <p><i class="fas fa-phone"></i> (11) 99999-9999</p>
-                    <p><i class="fas fa-envelope"></i> contato@sanclamarilia.com</p>
+                    <p><i class="fas fa-phone"></i> (14)3454-8500</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Av.Sampaio vidal,45 - Centro, Marilia - SP</p>
                 </div>
                 <div class="footer-section">
                     <h3>Horário</h3>

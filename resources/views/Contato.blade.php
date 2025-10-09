@@ -139,15 +139,9 @@ $currentPage = 'contato';
                 <div class="mission-card">
                     <i class=""></i>
                     <h3>Telefone</h3>
-                    <p>(11) 9999-9999</p>
-                    <p>(11) 8888-8888</p>
+                    <p>(14) 3454-8500</p>
                 </div>
-                <div class="mission-card">
-                    <i class=""></i>
-                    <h3>E-mail</h3>
-                    <p>contato@sanclamarilia.com</p>
-                    <p>emergencia@sanclamarilia.com</p>
-                </div>
+               
                 
                 <div class="mission-card">
                     <i class=""></i>
@@ -197,9 +191,8 @@ $currentPage = 'contato';
             </div>
             <div class="footer-section">
                 <h3>Contato</h3>
-                <p><i class="fas fa-phone"></i> (11) 9999-9999</p>
-                <p><i class="fas fa-envelope"></i> contato@sanclamarilia.com</p>
-                <p><i class="fas fa-map-marker-alt"></i> Rua das Flores, 123</p>
+                <p><i class="fas fa-phone"></i> (14) 3454-8500</p>
+                <p><i class="fas fa-map-marker-alt"></i> Av.Sampaio vidal,45 - Centro, Marilia - SP</p>
             </div>
             <div class="footer-section">
                 <h3>Horário</h3>
@@ -224,7 +217,18 @@ $currentPage = 'contato';
      <path d="M16.001 2.998c-7.352 0-13.333 5.981-13.333 13.333 0 2.354.614 4.652 1.777 6.667l-1.854 6.767 6.938-1.823c1.938 1.052 4.104 1.612 6.471 1.612 7.352 0 13.333-5.98 13.333-13.333s-5.981-13.333-13.333-13.333zM16 26.667c-2.021 0-3.979-.542-5.688-1.562l-.406-.24-4.104 1.083 1.125-4.073-.26-.417c-1.063-1.687-1.625-3.646-1.625-5.656 0-5.885 4.781-10.667 10.667-10.667 5.886 0 10.667 4.781 10.667 10.667 0 5.885-4.781 10.667-10.667 10.667zm5.625-8.646c-.302-.156-1.781-.885-2.062-.99-.281-.104-.49-.156-.698.157s-.802.99-.99 1.198c-.187.208-.365.229-.667.073-.302-.157-1.271-.469-2.419-1.49-.894-.797-1.5-1.781-1.677-2.083-.177-.302-.019-.469.135-.625.135-.135.302-.354.448-.531.156-.177.208-.302.313-.5.104-.208.052-.385-.026-.531-.078-.146-.698-1.677-.958-2.313-.25-.594-.5-.51-.698-.51h-.594c-.208 0-.531.073-.802.385s-1.052 1.031-1.052 2.51 1.076 2.917 1.229 3.125c.156.208 2.104 3.219 5.104 4.51.713.313 1.271.5 1.708.636.719.229 1.375.198 1.896.12.583-.094 1.781-.729 2.031-1.438.25-.708.25-1.323.177-1.437-.073-.114-.271-.177-.573-.323z"/>
    </svg>
 
-   <span>Fale Conosco</span>
+   <span>Fale Conosco</span> 
+
+   <a href="https://www.instagram.com/seu_usuario_aqui/"
+   target="_blank"
+   style="position: fixed; bottom: 80px; right: 20px; background: linear-gradient(45deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5); color: white; border-radius: 50px; padding: 12px 20px 12px 16px; text-decoration: none; font-family: Arial, sans-serif; font-size: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.15); display: flex; align-items: center; gap: 10px; z-index: 1000;">
+
+   <!-- Ícone visível do Instagram -->
+   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 448 512" fill="white">
+     <path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9S160.5 370.9 224.1 370.9 339 319.6 339 255.9 287.7 141 224.1 141zm0 188.6c-40.6 0-73.7-33.1-73.7-73.7s33.1-73.7 73.7-73.7 73.7 33.1 73.7 73.7-33.1 73.7-73.7 73.7zm146.4-194.3c0 14.9-12 26.9-26.9 26.9-14.9 0-26.9-12-26.9-26.9s12-26.9 26.9-26.9c14.9 0 26.9 12 26.9 26.9zM398.8 80c-7.8-19.6-22.9-34.7-42.6-42.6C334.1 32 278.4 32 224 32s-110.1 0-132.2 5.4c-19.6 7.8-34.7 22.9-42.6 42.6C44 102.1 44 157.8 44 212.2s0 110.1 5.4 132.2c7.8 19.6 22.9 34.7 42.6 42.6C113.9 400 169.6 400 224 400s110.1 0 132.2-5.4c19.6-7.8 34.7-22.9 42.6-42.6C404 322.3 404 266.6 404 212.2s0-110.1-5.2-132.2zM224 338c-68.5 0-124-55.5-124-124S155.5 90 224 90s124 55.5 124 124-55.5 124-124 124z"/>
+   </svg>
+
+   <span>Instagram</span>
 </a>
 
     </footer>

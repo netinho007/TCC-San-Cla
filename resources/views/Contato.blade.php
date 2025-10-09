@@ -204,7 +204,7 @@ $currentPage = 'contato';
         <div class="footer-bottom">
             <p>&copy; <?= date('Y') ?> SanClá Marília. Todos os direitos reservados.</p>
         </div>
-
+.
        
 
         <!-- Botão flutuante de WhatsApp com ícone SVG -->

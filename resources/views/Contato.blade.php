@@ -218,8 +218,10 @@ $currentPage = 'contato';
    </svg>
 
    <span>Fale Conosco</span> 
+  
+  </a>
 
-   <a href="https://www.instagram.com/seu_usuario_aqui/"
+  <a href="https://www.instagram.com/seu_usuario_aqui/"
    target="_blank"
    style="position: fixed; bottom: 80px; right: 20px; background: linear-gradient(45deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5); color: white; border-radius: 50px; padding: 12px 20px 12px 16px; text-decoration: none; font-family: Arial, sans-serif; font-size: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.15); display: flex; align-items: center; gap: 10px; z-index: 1000;">
 

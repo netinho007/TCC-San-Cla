@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 use App\Http\Middleware\LogAcessoMiddleware;
 /*
 |--------------------------------------------------------------------------
@@ -14,7 +15,7 @@ use App\Http\Middleware\LogAcessoMiddleware;
 */
 
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'home']);
+Route::get('/', [App\Http\Controllers\HomeController::class, 'home']);
 
 Route::get('/contato', [App\Http\Controllers\ContatoController::class, 'contato']);
 
@@ -26,7 +27,8 @@ Route::get('/formulario', [App\Http\Controllers\FormularioController::class, 'fo
 
 Route::get('/login', [App\Http\Controllers\LoginController::class, 'login']);
 
-Route::get('/cadastro', [App\Http\Controllers\CadastroController::class, 'cadastro']);
+Route::post('/cadastro', [UserController::class, 'store'])->name('user.store');
+
 
 Route::get('/forgot-password', [App\Http\Controllers\ForgotPasswordController::class, 'showForgotPasswordForm']);
 Route::post('/forgot-password', [App\Http\Controllers\ForgotPasswordController::class, 'sendResetLink']);

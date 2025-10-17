@@ -1,35 +1,33 @@
+<?php 
 namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
-{
-    use Notifiable;
+class user extends Authenticatable {
+    use HasFactory, Notifiable;
 
     protected $fillable = [
-        'nome', 'cpf', 'data_nascimento', 'telefone', 'email', 'password',
-        'cep', 'endereco', 'numero', 'complemento', 'bairro', 'cidade', 'estado',
-        'newsletter',
+        'nome',
+        'cpf',
+        'data_nascimento',
+        'telefone',
+        'email',
+        'password',
     ];
 
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
+    protected $hidden = ['password', 'remember_token'];
 
-    protected $casts = [
-        'newsletter' => 'boolean',
-        'email_verified_at' => 'datetime',
-        'data_nascimento' => 'date',
-    ];
-
-    public function pets()
-    {
-        return $this->hasMany(Pet::class);
+    public function endereco() {
+        return $this->hasOne(endereco::class);
     }
 
-    public function consultations()
-    {
-        return $this->hasMany(Consultation::class);
+    public function pets() {
+        return $this->hasMany(userPet::class);
+    }
+
+    public function avaliacoes() {
+        return $this->hasMany(avaliacao::class);
     }
 }

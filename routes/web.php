@@ -27,7 +27,7 @@ Route::get('/formulario', [App\Http\Controllers\FormularioController::class, 'fo
 
 Route::get('/login', [App\Http\Controllers\LoginController::class, 'login']);
 
-Route::post('/cadastro', [UserController::class, 'store'])->name('user.store');
+Route::get('/cadastro', [App\Http\Controllers\CadastroController::class, 'cadastro']);
 
 
 Route::get('/forgot-password', [App\Http\Controllers\ForgotPasswordController::class, 'showForgotPasswordForm']);

@@ -17,7 +17,7 @@ $currentPage = 'forgot-password';
         <nav>
             <img src="{{ asset('img/logo.webp') }}" width="200px" height="50px" alt="Logo da Clínica">
             <ul class="nav-links">
-                <li><a href="{{url ('home')}}">Início</a></li>
+                <li><a href="{{url ('/')}}">Início</a></li>
                 <li><a href="{{url ('sobrenos')}}">Sobre Nós</a></li>
                 <li><a href="{{url ('servicos')}}">Serviços</a></li>
                 <li><a href="{{url ('contato')}}">Contato</a></li>
@@ -74,7 +74,7 @@ $currentPage = 'forgot-password';
 
                 <div class="sidebar-card">
                     <h3><i class="fas fa-question-circle"></i> Precisa de Ajuda?</h3>
-                    <p>Entre em contato conosco pelo telefone <strong>(11) 9999-9999</strong> ou email <strong>contato@sanclamarilia.com</strong></p>
+                    <p>Entre em contato conosco pelo telefone <strong>(14) 3454-8500</strong> ou email <strong>contato@sanclamarilia.com</strong></p>
                 </div>
             </div>
         </div>

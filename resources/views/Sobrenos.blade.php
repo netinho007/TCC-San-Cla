@@ -17,7 +17,7 @@ $currentPage = 'sobrenos';
         <nav>
             <img src="{{ asset('img/logo.webp') }}" width="200px" height="50px" alt="Logo da Clínica">
             <ul class="nav-links">
-                <li><a href="{{url ('home')}}">Início</a></li>
+                <li><a href="{{url ('/')}}">Início</a></li>
                 <li><a href="{{url ('sobrenos')}}" class="active">Sobre Nós</a></li>
                 <li><a href="{{url ('servicos')}}">Serviços</a></li>
                 <li><a href="{{url ('contato')}}">Contato</a></li>

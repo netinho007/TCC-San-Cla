@@ -1,15 +1,33 @@
-<?php
-session_start();
-$currentPage = 'login';
-?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Clínica Veterinária</title>
-    <link rel="stylesheet" href="{{url ('css/style.css')}}">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .alert {
+            padding: 12px 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            border: 1px solid transparent;
+        }
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+            border-color: #c3e6cb;
+        }
+        .alert-danger {
+            background-color: #f8d7da;
+            color: #721c24;
+            border-color: #f5c6cb;
+        }
+        .alert ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+    </style>
 </head>
 <body>
     <!-- Header -->
@@ -17,12 +35,12 @@ $currentPage = 'login';
         <nav>
             <img src="{{ asset('img/logo.webp') }}" width="200px" height="50px" alt="Logo da Clínica">
             <ul class="nav-links">
-                <li><a href="{{url ('home')}}">Início</a></li>
-                <li><a href="{{url ('sobrenos')}}">Sobre Nós</a></li>
-                <li><a href="{{url ('servicos')}}">Serviços</a></li>
-                <li><a href="{{url ('contato')}}">Contato</a></li>
-                <li><a href="{{url ('formulario')}}">Formulário Pet</a></li>
-                <li><a href="{{url ('login')}}" class="active">Login</a></li>
+                <li><a href="{{ route('home') }}">Início</a></li>
+                <li><a href="{{ route('sobrenos') }}">Sobre Nós</a></li>
+                <li><a href="{{ route('servicos') }}">Serviços</a></li>
+                <li><a href="{{ route('contato') }}">Contato</a></li>
+                <li><a href="{{ route('formulario') }}">Formulário Pet</a></li>
+                <li><a href="{{ route('login') }}" class="active">Login</a></li>
             </ul>
             <div class="hamburger">
                 <span></span>
@@ -34,18 +52,38 @@ $currentPage = 'login';
     <br>
     <br>
 
-      <!-- Login Section -->
+    <!-- Login Section -->
     <section class="login-section">
         <div class="container">
             <div class="login-content">
                 <div class="login-container">
                     <h2><i class="fas fa-user-circle"></i> Login</h2>
-                    <form class="login-form" id="loginForm" action="processo.php" method="POST">
-                        <input type="hidden" name="action" value="login">
+                    
+                    <!-- MENSAGENS DE SUCESSO/ERRO -->
+                    @if(session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+
+                    @if($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
+                    <form class="login-form" id="loginForm" action="{{ route('login.submit') }}" method="POST">
+                        @csrf
+                        
                         <div class="form-group">
                             <label for="email">E-mail *</label>
-                            <input type="email" id="email" name="email" required>
+                            <input type="email" id="email" name="email" value="{{ old('email') }}" required>
                         </div>
+                        
                         <div class="form-group">
                             <label for="password">Senha *</label>
                             <div class="password-input">
@@ -62,19 +100,20 @@ $currentPage = 'login';
                                 <span class="checkmark"></span>
                                 Lembrar de mim
                             </label>
-                            <a href="{{url ('forgot-password')}}" class="forgot-password">Esqueceu a senha?</a>
+                            <!-- CORREÇÃO: Removido link forgot-password ou use URL direta -->
+                            <a href="#" class="forgot-password">Esqueceu a senha?</a>
                         </div>
+                        
                         <button type="submit" class="login-btn">
                             <i class="fas fa-sign-in-alt"></i> Entrar
                         </button>
-                        <div class="register-link">
-                        <p>Não tem uma conta? <a href="{{url ('cadastro')}}">Cadastre-se aqui</a></p>
+                    </form>
+                    
+                    <div class="register-link">
+                        <p>Não tem uma conta? <a href="{{ route('cadastro') }}">Cadastre-se aqui</a></p>
                     </div>
                 </div>
-                    </form>
-                    </div>
-                    <br>
-                    <br>
+                
                 <div class="login-sidebar">
                     <div class="sidebar-card">
                         <h3><i class="fas fa-shield-alt"></i> Segurança</h3>
@@ -92,8 +131,8 @@ $currentPage = 'login';
             </div>
         </div>
     </section>
+
     <!-- Rodapé -->
-     <b>
     <footer>
         <div class="container">
             <div class="footer-content">
@@ -113,44 +152,32 @@ $currentPage = 'login';
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; <?= date('Y') ?> SanClá Marília. Todos os direitos reservados.</p>
+                <p>&copy; {{ date('Y') }} SanClá Marília. Todos os direitos reservados.</p>
             </div>
         </div>
     </footer>
-    </b>
 
-    <script src="{{url ('js/script.js')}}"></script>
+    <script src="{{ asset('js/script.js') }}"></script>
     <script>
         // Toggle password visibility
-        document.querySelector('.toggle-password').addEventListener('click', function() {
-            const passwordInput = document.getElementById('password');
-            const icon = this.querySelector('i');
-            
-            if (passwordInput.type === 'password') {
-                passwordInput.type = 'text';
-                icon.classList.remove('fa-eye');
-                icon.classList.add('fa-eye-slash');
-            } else {
-                passwordInput.type = 'password';
-                icon.classList.remove('fa-eye-slash');
-                icon.classList.add('fa-eye');
-            }
+        document.querySelectorAll('.toggle-password').forEach(button => {
+            button.addEventListener('click', function() {
+                const passwordInput = this.previousElementSibling;
+                const icon = this.querySelector('i');
+                
+                if (passwordInput.type === 'password') {
+                    passwordInput.type = 'text';
+                    icon.classList.remove('fa-eye');
+                    icon.classList.add('fa-eye-slash');
+                } else {
+                    passwordInput.type = 'password';
+                    icon.classList.remove('fa-eye-slash');
+                    icon.classList.add('fa-eye');
+                }
+            });
         });
 
-        // Login form validation
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            
-            if (!email || !password) {
-                e.preventDefault();
-                alert('Por favor, preencha todos os campos obrigatórios.');
-                return;
-            }
-            // Permite o envio ao processo.php
-        });
-
-        // Real-time validation
+        // Validação em tempo real (APENAS visual, não impede envio)
         const requiredFields = document.querySelectorAll('[required]');
         requiredFields.forEach(field => {
             field.addEventListener('blur', function() {
@@ -160,6 +187,17 @@ $currentPage = 'login';
                     this.style.borderColor = '#4CAF50';
                 }
             });
+        });
+
+        // Validação básica do formulário (APENAS alerta, não impede envio)
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            if (!email || !password) {
+                alert('Por favor, preencha todos os campos obrigatórios.');
+                // NÃO usa preventDefault() - permite o envio para o Laravel
+            }
         });
     </script>
 </body>

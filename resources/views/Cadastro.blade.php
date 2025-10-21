@@ -39,7 +39,8 @@ $currentPage = 'cadastro';
             <div class="cadastro-content">
                 <div class="cadastro-container">
                     <h2><i class="fas fa-user-plus"></i> Cadastro</h2>
-                    <form class="cadastro-form" id="cadastroForm" action="processo.php" method="POST">
+                    <form class="cadastro-form" id="cadastroForm" action="{{ route('cadastro.store') }}" method="POST">
+                    @csrf
                         <input type="hidden" name="action" value="cadastro">
                         <!-- Informações Pessoais -->
                         <div class="form-section">
@@ -54,8 +55,9 @@ $currentPage = 'cadastro';
                                     <input type="text" id="cpf" name="cpf" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="dataNascimento">Data de Nascimento *</label>
-                                    <input type="date" id="dataNascimento" name="dataNascimento" required>
+                                    <!-- CORREÇÃO: data_nascimento -->
+                                    <label for="data_nascimento">Data de Nascimento *</label>
+                                    <input type="date" id="data_nascimento" name="data_nascimento" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="telefone">Telefone *</label>
@@ -148,9 +150,10 @@ $currentPage = 'cadastro';
                             <h3><i class="fas fa-lock"></i> Senha</h3>
                             <div class="form-grid">
                                 <div class="form-group">
-                                    <label for="senha">Senha *</label>
+                                    <!-- CORREÇÃO: password -->
+                                    <label for="password">Senha *</label>
                                     <div class="password-input">
-                                        <input type="password" id="senha" name="senha" required>
+                                        <input type="password" id="password" name="password" required>
                                         <button type="button" class="toggle-password">
                                             <i class="fas fa-eye"></i>
                                         </button>
@@ -177,7 +180,8 @@ $currentPage = 'cadastro';
                                     Li e aceito os <a href="#" class="terms-link">Termos de Uso</a> e <a href="#" class="terms-link">Política de Privacidade</a> *
                                 </label>
                                 <label class="checkbox-label">
-                                    <input type="checkbox" name="newsletter">
+                                    <!-- CORREÇÃO: newsletter com value -->
+                                    <input type="checkbox" name="newsletter" value="1">
                                     <span class="checkmark"></span>
                                     Desejo receber novidades e promoções por e-mail
                                 </label>
@@ -270,7 +274,8 @@ $currentPage = 'cadastro';
         document.getElementById('cadastroForm').addEventListener('submit', function(e) {
             const email = document.getElementById('email').value;
             const confirmEmail = document.getElementById('confirmEmail').value;
-            const senha = document.getElementById('senha').value;
+            // CORREÇÃO: password em vez de senha
+            const password = document.getElementById('password').value;
             const confirmSenha = document.getElementById('confirmSenha').value;
             const termos = document.querySelector('input[name="termos"]').checked;
             
@@ -286,13 +291,15 @@ $currentPage = 'cadastro';
                 return;
             }
             
-            if (senha !== confirmSenha) {
+            // CORREÇÃO: password em vez de senha
+            if (password !== confirmSenha) {
                 e.preventDefault();
                 alert('As senhas não coincidem.');
                 return;
             }
             
-            if (senha.length < 6) {
+            // CORREÇÃO: password em vez de senha
+            if (password.length < 6) {
                 e.preventDefault();
                 alert('A senha deve ter pelo menos 6 caracteres.');
                 return;
@@ -326,10 +333,11 @@ $currentPage = 'cadastro';
 
         // Password confirmation validation
         document.getElementById('confirmSenha').addEventListener('blur', function() {
-            const senha = document.getElementById('senha').value;
+            // CORREÇÃO: password em vez de senha
+            const password = document.getElementById('password').value;
             const confirmSenha = this.value;
             
-            if (confirmSenha && senha !== confirmSenha) {
+            if (confirmSenha && password !== confirmSenha) {
                 this.style.borderColor = '#ff4444';
             } else if (confirmSenha) {
                 this.style.borderColor = '#4CAF50';

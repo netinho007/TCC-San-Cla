@@ -35,12 +35,21 @@
         <nav>
             <img src="{{ asset('img/logo.webp') }}" width="200px" height="50px" alt="Logo da Clínica">
             <ul class="nav-links">
+<<<<<<< HEAD
                 <li><a href="{{ route('home') }}">Início</a></li>
                 <li><a href="{{ route('sobrenos') }}">Sobre Nós</a></li>
                 <li><a href="{{ route('servicos') }}">Serviços</a></li>
                 <li><a href="{{ route('contato') }}">Contato</a></li>
                 <li><a href="{{ route('formulario') }}">Formulário Pet</a></li>
                 <li><a href="{{ route('login') }}" class="active">Login</a></li>
+=======
+                <li><a href="{{url ('/')}}">Início</a></li>
+                <li><a href="{{url ('sobrenos')}}">Sobre Nós</a></li>
+                <li><a href="{{url ('servicos')}}">Serviços</a></li>
+                <li><a href="{{url ('contato')}}">Contato</a></li>
+                <li><a href="{{url ('formulario')}}">Formulário Pet</a></li>
+                <li><a href="{{url ('login')}}" class="active">Login</a></li>
+>>>>>>> fe71a59608c8d921c69eda0abdd1afff92fa1f9c
             </ul>
             <div class="hamburger">
                 <span></span>

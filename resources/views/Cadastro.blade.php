@@ -17,12 +17,13 @@ $currentPage = 'cadastro';
         <nav>
             <img src="{{ asset('img/logo.webp') }}" width="200px" height="50px" alt="Logo da Clínica">
             <ul class="nav-links">
-                <li><a href="{{url ('home')}}">Início</a></li>
+                <li><a href="{{url ('/')}}">Início</a></li>
                 <li><a href="{{url ('sobrenos')}}">Sobre Nós</a></li>
                 <li><a href="{{url ('servicos')}}">Serviços</a></li>
                 <li><a href="{{url ('contato')}}">Contato</a></li>
                 <li><a href="{{url ('formulario')}}">Formulário Pet</a></li>
                 <li><a href="{{url ('login')}}">Login</a></li>
+                
             </ul>
             <div class="hamburger">
                 <span></span>

@@ -17,7 +17,7 @@ $currentPage = 'contato';
         <nav>
             <img src="{{ asset('img/logo.webp') }}" width="200px" height="50px" alt="Logo da Clínica">
             <ul class="nav-links">
-                <li><a href="{{url ('home')}}">Início</a></li>
+                <li><a href="{{url ('/')}}">Início</a></li>
                 <li><a href="{{url ('sobrenos')}}">Sobre Nós</a></li>
                 <li><a href="{{url ('servicos')}}">Serviços</a></li>
                 <li><a href="{{url ('contato')}}" class="active">Contato</a></li>
@@ -221,7 +221,7 @@ $currentPage = 'contato';
   
   </a>
 
-  <a href="https://www.instagram.com/seu_usuario_aqui/"
+  <a href="https://www.instagram.com/sanclamarilia/#"
    target="_blank"
    style="position: fixed; bottom: 80px; right: 20px; background: linear-gradient(45deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5); color: white; border-radius: 50px; padding: 12px 20px 12px 16px; text-decoration: none; font-family: Arial, sans-serif; font-size: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.15); display: flex; align-items: center; gap: 10px; z-index: 1000;">
 

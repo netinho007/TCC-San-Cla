@@ -30,6 +30,9 @@ Route::get('/formulario', function () {
 })->name('formulario');
 Route::post('/formulario', [PetController::class, 'store'])->name('pet.store');
 
+// Rotas de Whats APP
+Route::post('/send-whatsapp', [WhatsAppController::class, 'sendMessage'])->name('send.whatsapp');
+
 // Rotas simples para navegação
 Route::get('/servicos', function () {
     return view('servicos');

@@ -38,60 +38,65 @@ $currentPage = 'contato';
 
 
     <!-- Contato Form -->
-    <section class="contact-form-section">
-        <div class="container">
-            <div class="contact-content">
-                <div class="form-container">
-                    <h2>Envie uma Mensagem</h2>
-                    <form class="contact-form" id="contactForm" action="processa.php" method="POST">
-                        <input type="hidden" name="action" value="contato">
-                        <div class="form-group">
-                            <label for="name">Nome Completo *</label>
-                            <input type="text" id="name" name="name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="pet-name">Nome do Pet</label>
-                            <input type="text" id="pet-name" name="pet-name">
-                        </div>
-                        <div class="form-group">
-                            <label for="pet-type">Tipo de Pet</label>
-                            <select id="pet-type" name="pet-type">
-                                <option value="">Selecione...</option>
-                                <option value="cachorro">Cachorro</option>
-                                <option value="gato">Gato</option>
-                                <option value="outro">Outro</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="service">Serviço de Interesse</label>
-                            <select id="service" name="service">
-                                <option value="">Selecione...</option>
-                                <option value="consulta">Consulta</option>
-                                <option value="vacina">Vacinação</option>
-                                <option value="cirurgia">Cirurgia</option>
-                                <option value="exame">Exames</option>
-                                <option value="emergencia">Emergência</option>
-                                <option value="outro">Outro</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Mensagem *</label>
-                            <textarea id="message" name="message" rows="5" required placeholder="Descreva o motivo do contato..."></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label class="checkbox-label">
-                                <input type="checkbox" name="newsletter" value="yes">
-                                <span class="checkmark"></span>
-                                Desejo receber novidades e dicas sobre cuidados com pets
-                            </label>
-                        </div>
-                        <button type="submit" class="submit-btn">Enviar Mensagem</button>
-                    </form>
-                </div>
-                
+<!-- Contato Form -->
+<!-- Contato Form -->
+<section class="contact-form-section">
+    <div class="container">
+        <div class="contact-content">
+            <div class="form-container">
+                <h2>Envie uma Mensagem</h2>
+                <form class="contact-form" id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Nome Completo *</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="pet-name">Nome do Pet</label>
+                        <input type="text" id="pet-name" name="pet_name">
+                    </div>
+                    <div class="form-group">
+                        <label for="pet-type">Tipo de Pet</label>
+                        <select id="pet-type" name="pet_type">
+                            <option value="">Selecione...</option>
+                            <option value="cachorro">Cachorro</option>
+                            <option value="gato">Gato</option>
+                            <option value="outro">Outro</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="service">Serviço de Interesse</label>
+                        <select id="service" name="service">
+                            <option value="">Selecione...</option>
+                            <option value="consulta">Consulta</option>
+                            <option value="vacina">Vacinação</option>
+                            <option value="cirurgia">Cirurgia</option>
+                            <option value="exame">Exames</option>
+                            <option value="emergencia">Emergência</option>
+                            <option value="outro">Outro</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Mensagem *</label>
+                        <textarea id="message" name="message" rows="5" required placeholder="Descreva o motivo do contato..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="newsletter" name="newsletter" value="yes">
+                            <span class="checkmark"></span>
+                            Desejo receber novidades e dicas sobre cuidados com pets
+                        </label>
+                    </div>
+                    <button type="button" class="submit-btn" onclick="sendToWhatsApp()">
+                        <i class="fab fa-whatsapp"></i> Enviar para WhatsApp
+                    </button>
+                </form>
             </div>
         </div>
-    </section>
+    </div>
+</section>
+
+
+
 
     <!-- Mapa Section -->
 
@@ -102,7 +107,7 @@ $currentPage = 'contato';
             
           
 
-           <center>
+  
 
            <section class="mission-section">
         <div class="container">
@@ -229,31 +234,87 @@ $currentPage = 'contato';
 </b>
     <script src="{{url ('js/script.js')}}"></script>
     <script>
-        // Validação do formulário de contato
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
-            
-            if (!name || !email || !message) {
-                e.preventDefault();
-                alert('Por favor, preencha todos os campos obrigatórios.');
-                return;
-            }
-            // Permite o envio ao processador PHP
-        });
+function sendToWhatsApp() {
+    // Pegar os valores dos campos
+    const name = document.getElementById('name').value;
+    const petName = document.getElementById('pet-name').value;
+    const petType = document.getElementById('pet-type').value;
+    const service = document.getElementById('service').value;
+    const message = document.getElementById('message').value;
+    const newsletter = document.getElementById('newsletter').checked;
+    
+    // Validar campos obrigatórios
+    if (!name || !message) {
+        alert('Por favor, preencha os campos obrigatórios (Nome e Mensagem).');
+        return;
+    }
+    
+    // Formatar a mensagem bonitinha
+    let whatsappMessage = `🐾 *NOVO CONTATO - CLÍNICA VETERINÁRIA SANCLÁ* 🐾\n\n`;
+    
+    whatsappMessage += `👤 *DADOS DO CLIENTE*\n`;
+    whatsappMessage += `● Nome: ${name}\n\n`;
+    
+    whatsappMessage += `🐕 *DADOS DO PET*\n`;
+    whatsappMessage += `● Nome do Pet: ${petName || 'Não informado'}\n`;
+    whatsappMessage += `● Tipo: ${petType || 'Não informado'}\n`;
+    whatsappMessage += `● Serviço de Interesse: ${service || 'Não informado'}\n\n`;
+    
+    whatsappMessage += `💬 *MENSAGEM DO CLIENTE*\n`;
+    whatsappMessage += `${message}\n\n`;
+    
+    if (newsletter) {
+        whatsappMessage += `✅ *Deseja receber novidades e dicas*\n\n`;
+    }
+    
+    whatsappMessage += `📅 _Enviado via Site em ${new Date().toLocaleDateString('pt-BR')} às ${new Date().toLocaleTimeString('pt-BR', {hour: '2-digit', minute: '2-digit'})}_`;
 
-        // Real-time validation
-        const requiredFields = document.querySelectorAll('[required]');
-        requiredFields.forEach(field => {
-            field.addEventListener('blur', function() {
-                if (!this.value) {
-                    this.style.borderColor = '#ff4444';
-                } else {
-                    this.style.borderColor = '#4CAF50';
-                }
-            });
-        });
-    </script>
+    // SEU NÚMERO DO WHATSAPP
+    const yourPhone = '5515998403282'; // Seu número com DDD + código do Brasil
+    
+    // Criar o link do WhatsApp
+    const encodedMessage = encodeURIComponent(whatsappMessage);
+    const whatsappUrl = `https://wa.me/${yourPhone}?text=${encodedMessage}`;
+    
+    // Redirecionar para o WhatsApp
+    window.open(whatsappUrl, '_blank');
+}
+
+// Validação em tempo real
+const requiredFields = document.querySelectorAll('[required]');
+requiredFields.forEach(field => {
+    field.addEventListener('blur', function() {
+        if (!this.value) {
+            this.style.borderColor = '#ff4444';
+        } else {
+            this.style.borderColor = '#4CAF50';
+        }
+    });
+});
+
+// Adicionar ícone do WhatsApp ao botão (CSS)
+const style = document.createElement('style');
+style.textContent = `
+    .submit-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        background: #25D366;
+        color: white;
+        border: none;
+        padding: 15px 30px;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background 0.3s;
+    }
+    .submit-btn:hover {
+        background: #128C7E;
+    }
+`;
+document.head.appendChild(style);
+</script>
 </body>
 </html>

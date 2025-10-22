@@ -8,20 +8,13 @@ use Illuminate\Support\Facades\Hash;
 
 class CadastroController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function create()
     {
         return view('cadastro');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        // Validação
         $request->validate([
             'nome' => 'required|string|max:255',
             'cpf' => 'required|string|max:14|unique:users',
@@ -38,7 +31,6 @@ class CadastroController extends Controller
             'estado' => 'required|string|max:2',
         ]);
 
-        // Cria o usuário
         User::create([
             'nome' => $request->nome,
             'cpf' => $request->cpf,
@@ -56,6 +48,6 @@ class CadastroController extends Controller
             'newsletter' => $request->has('newsletter'),
         ]);
 
-        return redirect()->route('login')->with('success', 'Cadastro realizado com sucesso! Faça login para continuar.');
+        return redirect()->route('login')->with('success', 'Cadastro realizado com sucesso!');
     }
 }

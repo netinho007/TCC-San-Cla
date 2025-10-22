@@ -34,54 +34,71 @@ $currentPage = 'formulario-pet';
     <br>
     <br>
 
-  
-
     <!-- Formulário -->
     <section class="formulario-section">
         <div class="container">
             <div class="formulario-content">
                 <div class="form-container">
                     <h2><i class="fas fa-paw"></i> Informações do Pet</h2>
-                    <form class="pet-form" id="petForm" action="processa.php" method="POST">
-                        <input type="hidden" name="action" value="formulario-pet">
+
+                    <!-- MENSAGENS DE SUCESSO/ERRO -->
+                    @if(session('success'))
+                        <div class="alert alert-success" style="background: #d4edda; color: #155724; padding: 12px; border-radius: 5px; margin-bottom: 20px;">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+
+                    @if($errors->any())
+                        <div class="alert alert-danger" style="background: #f8d7da; color: #721c24; padding: 12px; border-radius: 5px; margin-bottom: 20px;">
+                            <ul>
+                                @foreach($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
+                    <form class="pet-form" id="petForm" action="{{ route('pet.store') }}" method="POST">
+                        @csrf
+                        
                         <!-- Informações Básicas -->
                         <div class="form-section">
                             <h3><i class="fas fa-info-circle"></i> Informações Básicas</h3>
                             <div class="form-grid">
                                 <div class="form-group">
-                                    <label for="nomePet">Nome do Pet *</label>
-                                    <input type="text" id="nomePet" name="nomePet" required>
+                                    <label for="nome_pet">Nome do Pet *</label>
+                                    <input type="text" id="nome_pet" name="nome_pet" value="{{ old('nome_pet', '') }}" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="especie">Espécie *</label>
                                     <select id="especie" name="especie" required>
                                         <option value="">Selecione...</option>
-                                        <option value="cachorro">Cachorro</option>
-                                        <option value="gato">Gato</option>
-                                        <option value="ave">Ave</option>
-                                        <option value="roedor">Roedor</option>
-                                        <option value="reptil">Réptil</option>
-                                        <option value="outro">Outro</option>
+                                        <option value="cachorro" {{ old('especie', '') == 'cachorro' ? 'selected' : '' }}>Cachorro</option>
+                                        <option value="gato" {{ old('especie', '') == 'gato' ? 'selected' : '' }}>Gato</option>
+                                        <option value="ave" {{ old('especie', '') == 'ave' ? 'selected' : '' }}>Ave</option>
+                                        <option value="roedor" {{ old('especie', '') == 'roedor' ? 'selected' : '' }}>Roedor</option>
+                                        <option value="reptil" {{ old('especie', '') == 'reptil' ? 'selected' : '' }}>Réptil</option>
+                                        <option value="outro" {{ old('especie', '') == 'outro' ? 'selected' : '' }}>Outro</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="raca">Raça</label>
-                                    <input type="text" id="raca" name="raca">
+                                    <input type="text" id="raca" name="raca" value="{{ old('raca', '') }}">
                                 </div>
                                 <div class="form-group">
                                     <label for="idade">Idade (anos)</label>
-                                    <input type="number" id="idade" name="idade" min="0" max="30">
+                                    <input type="number" id="idade" name="idade" value="{{ old('idade', '') }}" min="0" max="30">
                                 </div>
                                 <div class="form-group">
                                     <label for="peso">Peso (kg)</label>
-                                    <input type="number" id="peso" name="peso" min="0" step="0.1">
+                                    <input type="number" id="peso" name="peso" value="{{ old('peso', '') }}" min="0" step="0.1">
                                 </div>
                                 <div class="form-group">
                                     <label for="sexo">Sexo</label>
                                     <select id="sexo" name="sexo">
                                         <option value="">Selecione...</option>
-                                        <option value="macho">Macho</option>
-                                        <option value="femea">Fêmea</option>
+                                        <option value="macho" {{ old('sexo', '') == 'macho' ? 'selected' : '' }}>Macho</option>
+                                        <option value="femea" {{ old('sexo', '') == 'femea' ? 'selected' : '' }}>Fêmea</option>
                                     </select>
                                 </div>
                             </div>
@@ -92,34 +109,34 @@ $currentPage = 'formulario-pet';
                             <h3><i class="fas fa-heartbeat"></i> Histórico de Saúde</h3>
                             <div class="form-grid">
                                 <div class="form-group">
-                                    <label for="vacinas">Vacinas em dia?</label>
-                                    <select id="vacinas" name="vacinas">
+                                    <label for="vacinas_em_dia">Vacinas em dia?</label>
+                                    <select id="vacinas_em_dia" name="vacinas_em_dia">
                                         <option value="">Selecione...</option>
-                                        <option value="sim">Sim</option>
-                                        <option value="nao">Não</option>
-                                        <option value="nao_sei">Não sei</option>
+                                        <option value="sim" {{ old('vacinas_em_dia', '') == 'sim' ? 'selected' : '' }}>Sim</option>
+                                        <option value="nao" {{ old('vacinas_em_dia', '') == 'nao' ? 'selected' : '' }}>Não</option>
+                                        <option value="nao_sei" {{ old('vacinas_em_dia', '') == 'nao_sei' ? 'selected' : '' }}>Não sei</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="vermifugacao">Vermífugo em dia?</label>
-                                    <select id="vermifugacao" name="vermifugacao">
+                                    <label for="vermifugacao_em_dia">Vermífugo em dia?</label>
+                                    <select id="vermifugacao_em_dia" name="vermifugacao_em_dia">
                                         <option value="">Selecione...</option>
-                                        <option value="sim">Sim</option>
-                                        <option value="nao">Não</option>
-                                        <option value="nao_sei">Não sei</option>
+                                        <option value="sim" {{ old('vermifugacao_em_dia', '') == 'sim' ? 'selected' : '' }}>Sim</option>
+                                        <option value="nao" {{ old('vermifugacao_em_dia', '') == 'nao' ? 'selected' : '' }}>Não</option>
+                                        <option value="nao_sei" {{ old('vermifugacao_em_dia', '') == 'nao_sei' ? 'selected' : '' }}>Não sei</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="castrado">Castrado/Esterilizado?</label>
                                     <select id="castrado" name="castrado">
                                         <option value="">Selecione...</option>
-                                        <option value="sim">Sim</option>
-                                        <option value="nao">Não</option>
+                                        <option value="sim" {{ old('castrado', '') == 'sim' ? 'selected' : '' }}>Sim</option>
+                                        <option value="nao" {{ old('castrado', '') == 'nao' ? 'selected' : '' }}>Não</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="doencas">Doenças prévias</label>
-                                    <textarea id="doencas" name="doencas" rows="3" placeholder="Descreva doenças, cirurgias ou tratamentos anteriores..."></textarea>
+                                    <label for="doencas_previas">Doenças prévias</label>
+                                    <textarea id="doencas_previas" name="doencas_previas" rows="3" placeholder="Descreva doenças, cirurgias ou tratamentos anteriores...">{{ old('doencas_previas', '') }}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -132,26 +149,26 @@ $currentPage = 'formulario-pet';
                                     <label for="temperamento">Temperamento</label>
                                     <select id="temperamento" name="temperamento">
                                         <option value="">Selecione...</option>
-                                        <option value="calmo">Calmo</option>
-                                        <option value="agitado">Agitado</option>
-                                        <option value="medroso">Medroso</option>
-                                        <option value="agressivo">Agressivo</option>
-                                        <option value="amigavel">Amigável</option>
+                                        <option value="calmo" {{ old('temperamento', '') == 'calmo' ? 'selected' : '' }}>Calmo</option>
+                                        <option value="agitado" {{ old('temperamento', '') == 'agitado' ? 'selected' : '' }}>Agitado</option>
+                                        <option value="medroso" {{ old('temperamento', '') == 'medroso' ? 'selected' : '' }}>Medroso</option>
+                                        <option value="agressivo" {{ old('temperamento', '') == 'agressivo' ? 'selected' : '' }}>Agressivo</option>
+                                        <option value="amigavel" {{ old('temperamento', '') == 'amigavel' ? 'selected' : '' }}>Amigável</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="socializacao">Como se comporta com outros animais?</label>
                                     <select id="socializacao" name="socializacao">
                                         <option value="">Selecione...</option>
-                                        <option value="muito_social">Muito social</option>
-                                        <option value="social">Social</option>
-                                        <option value="neutro">Neutro</option>
-                                        <option value="agressivo">Agressivo</option>
+                                        <option value="muito_social" {{ old('socializacao', '') == 'muito_social' ? 'selected' : '' }}>Muito social</option>
+                                        <option value="social" {{ old('socializacao', '') == 'social' ? 'selected' : '' }}>Social</option>
+                                        <option value="neutro" {{ old('socializacao', '') == 'neutro' ? 'selected' : '' }}>Neutro</option>
+                                        <option value="agressivo" {{ old('socializacao', '') == 'agressivo' ? 'selected' : '' }}>Agressivo</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="comportamento_estranho">Algum comportamento estranho?</label>
-                                    <textarea id="comportamento_estranho" name="comportamento_estranho" rows="3" placeholder="Descreva comportamentos incomuns..."></textarea>
+                                    <textarea id="comportamento_estranho" name="comportamento_estranho" rows="3" placeholder="Descreva comportamentos incomuns...">{{ old('comportamento_estranho', '') }}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -164,25 +181,25 @@ $currentPage = 'formulario-pet';
                                     <label for="tipo_alimentacao">Tipo de alimentação</label>
                                     <select id="tipo_alimentacao" name="tipo_alimentacao">
                                         <option value="">Selecione...</option>
-                                        <option value="racao">Ração</option>
-                                        <option value="comida_caseira">Comida caseira</option>
-                                        <option value="mista">Mista</option>
-                                        <option value="outro">Outro</option>
+                                        <option value="racao" {{ old('tipo_alimentacao', '') == 'racao' ? 'selected' : '' }}>Ração</option>
+                                        <option value="comida_caseira" {{ old('tipo_alimentacao', '') == 'comida_caseira' ? 'selected' : '' }}>Comida caseira</option>
+                                        <option value="mista" {{ old('tipo_alimentacao', '') == 'mista' ? 'selected' : '' }}>Mista</option>
+                                        <option value="outro" {{ old('tipo_alimentacao', '') == 'outro' ? 'selected' : '' }}>Outro</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="frequencia_alimentacao">Frequência de alimentação</label>
                                     <select id="frequencia_alimentacao" name="frequencia_alimentacao">
                                         <option value="">Selecione...</option>
-                                        <option value="1_vez_dia">1 vez ao dia</option>
-                                        <option value="2_vezes_dia">2 vezes ao dia</option>
-                                        <option value="3_vezes_dia">3 vezes ao dia</option>
-                                        <option value="livre">Livre demanda</option>
+                                        <option value="1_vez_dia" {{ old('frequencia_alimentacao', '') == '1_vez_dia' ? 'selected' : '' }}>1 vez ao dia</option>
+                                        <option value="2_vezes_dia" {{ old('frequencia_alimentacao', '') == '2_vezes_dia' ? 'selected' : '' }}>2 vezes ao dia</option>
+                                        <option value="3_vezes_dia" {{ old('frequencia_alimentacao', '') == '3_vezes_dia' ? 'selected' : '' }}>3 vezes ao dia</option>
+                                        <option value="livre" {{ old('frequencia_alimentacao', '') == 'livre' ? 'selected' : '' }}>Livre demanda</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="alergias">Alergias alimentares</label>
-                                    <textarea id="alergias" name="alergias" rows="2" placeholder="Descreva alergias conhecidas..."></textarea>
+                                    <textarea id="alergias" name="alergias" rows="2" placeholder="Descreva alergias conhecidas...">{{ old('alergias', '') }}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -192,20 +209,20 @@ $currentPage = 'formulario-pet';
                             <h3><i class="fas fa-user"></i> Informações do Tutor</h3>
                             <div class="form-grid">
                                 <div class="form-group">
-                                    <label for="nomeTutor">Nome do Tutor *</label>
-                                    <input type="text" id="nomeTutor" name="nomeTutor" required>
+                                    <label for="nome_tutor">Nome do Tutor *</label>
+                                    <input type="text" id="nome_tutor" name="nome_tutor" value="{{ old('nome_tutor', '') }}" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="telefone">Telefone *</label>
-                                    <input type="tel" id="telefone" name="telefone" required>
+                                    <label for="telefone_tutor">Telefone *</label>
+                                    <input type="tel" id="telefone_tutor" name="telefone_tutor" value="{{ old('telefone_tutor', '') }}" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="email">E-mail</label>
-                                    <input type="email" id="email" name="email">
+                                    <label for="email_tutor">E-mail</label>
+                                    <input type="email" id="email_tutor" name="email_tutor" value="{{ old('email_tutor', '') }}">
                                 </div>
                                 <div class="form-group">
-                                    <label for="endereco">Endereço</label>
-                                    <textarea id="endereco" name="endereco" rows="2"></textarea>
+                                    <label for="endereco_tutor">Endereço</label>
+                                    <textarea id="endereco_tutor" name="endereco_tutor" rows="2">{{ old('endereco_tutor', '') }}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -215,16 +232,16 @@ $currentPage = 'formulario-pet';
                             <h3><i class="fas fa-stethoscope"></i> Motivo da Consulta</h3>
                             <div class="form-group">
                                 <label for="motivo_consulta">Descreva o motivo da consulta *</label>
-                                <textarea id="motivo_consulta" name="motivo_consulta" rows="4" required placeholder="Descreva os sintomas, quando começaram, e qualquer informação relevante..."></textarea>
+                                <textarea id="motivo_consulta" name="motivo_consulta" rows="4" required placeholder="Descreva os sintomas, quando começaram, e qualquer informação relevante...">{{ old('motivo_consulta', '') }}</textarea>
                             </div>
                             <div class="form-group">
                                 <label for="urgencia">Nível de urgência</label>
                                 <select id="urgencia" name="urgencia">
                                     <option value="">Selecione...</option>
-                                    <option value="baixa">Baixa - Consulta de rotina</option>
-                                    <option value="media">Média - Sintomas leves</option>
-                                    <option value="alta">Alta - Sintomas preocupantes</option>
-                                    <option value="emergencia">Emergência - Sintomas graves</option>
+                                    <option value="baixa" {{ old('urgencia', '') == 'baixa' ? 'selected' : '' }}>Baixa - Consulta de rotina</option>
+                                    <option value="media" {{ old('urgencia', '') == 'media' ? 'selected' : '' }}>Média - Sintomas leves</option>
+                                    <option value="alta" {{ old('urgencia', '') == 'alta' ? 'selected' : '' }}>Alta - Sintomas preocupantes</option>
+                                    <option value="emergencia" {{ old('urgencia', '') == 'emergencia' ? 'selected' : '' }}>Emergência - Sintomas graves</option>
                                 </select>
                             </div>
                         </div>
@@ -239,7 +256,7 @@ $currentPage = 'formulario-pet';
                             </div>
                             <div class="form-group">
                                 <label class="checkbox-label">
-                                    <input type="checkbox" name="autorizacao">
+                                    <input type="checkbox" name="autorizacao_uso" value="1" {{ old('autorizacao_uso') ? 'checked' : '' }}>
                                     Autorizo o uso das informações para fins veterinários
                                 </label>
                             </div>
@@ -322,10 +339,10 @@ $currentPage = 'formulario-pet';
     <script>
         // Validação do formulário
         document.getElementById('petForm').addEventListener('submit', function(e) {
-            const nomePet = document.getElementById('nomePet').value;
+            const nomePet = document.getElementById('nome_pet').value;
             const especie = document.getElementById('especie').value;
-            const nomeTutor = document.getElementById('nomeTutor').value;
-            const telefone = document.getElementById('telefone').value;
+            const nomeTutor = document.getElementById('nome_tutor').value;
+            const telefone = document.getElementById('telefone_tutor').value;
             const motivoConsulta = document.getElementById('motivo_consulta').value;
             const termos = document.querySelector('input[name="termos"]').checked;
             
@@ -334,7 +351,6 @@ $currentPage = 'formulario-pet';
                 alert('Por favor, preencha todos os campos obrigatórios e aceite os termos.');
                 return;
             }
-            // Permite o envio ao processador PHP
         });
 
         // Validação em tempo real

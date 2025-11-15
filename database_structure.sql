@@ -1,14 +1,7 @@
--- =====================================================
--- BANCO DE DADOS COMPLETO - CLÍNICA VETERINÁRIA
--- =====================================================
-
 DROP DATABASE IF EXISTS BD_AULA;
 CREATE DATABASE BD_AULA CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE BD_AULA;
 
--- =====================================================
--- 1. TABELA USERS (Usuários/Cadastro)
--- =====================================================
 CREATE TABLE users (
     id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(255) NOT NULL,
@@ -29,18 +22,14 @@ CREATE TABLE users (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
--- =====================================================
--- 2. TABELA PASSWORD_RESETS (Recuperação de Senha)
--- =====================================================
+
 CREATE TABLE password_reset_tokens (
     email VARCHAR(255) PRIMARY KEY,
     token VARCHAR(255) NOT NULL,
     created_at TIMESTAMP NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- =====================================================
--- 3. TABELA PETS (Pets dos Usuários)
--- =====================================================
+
 CREATE TABLE pets (
     id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     user_id BIGINT UNSIGNED NULL COMMENT 'Pode ser NULL se usuário não estiver logado',
@@ -64,7 +53,3 @@ CREATE TABLE pets (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL
 );
-
--- =====================================================
--- ✅ FIM DO ARQUIVO BD_AULA.SQL
--- =====================================================

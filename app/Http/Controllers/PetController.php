@@ -61,18 +61,7 @@ class PetController extends Controller
             'alergias' => $request->alergias,
         ]);
 
-        // Cria a consulta
-        Consultation::create([
-            'pet_id' => $pet->id,
-            'user_id' => $userId,
-            'motivo_consulta' => $request->motivo_consulta,
-            'urgencia' => $request->urgencia,
-            'nome_tutor' => $request->nome_tutor,
-            'telefone_tutor' => $request->telefone_tutor,
-            'email_tutor' => $request->email_tutor,
-            'endereco_tutor' => $request->endereco_tutor,
-            'autorizacao_uso' => $request->has('autorizacao_uso'),
-        ]);
+    
 
         return redirect()->route('formulario')->with('success', 'Formulário enviado com sucesso! Entraremos em contato em breve.');
     }

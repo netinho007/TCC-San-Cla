@@ -35,22 +35,47 @@
         <nav>
             <img src="{{ asset('img/logo.webp') }}" width="200px" height="50px" alt="Logo da Clínica">
             <ul class="nav-links">
-
-                <!-- <li><a href="{{ route('home') }}">Início</a></li>
-                <li><a href="{{ route('sobrenos') }}">Sobre Nós</a></li>
-                <li><a href="{{ route('servicos') }}">Serviços</a></li>
-                <li><a href="{{ route('contato') }}">Contato</a></li>
-                <li><a href="{{ route('formulario') }}">Formulário Pet</a></li>
-                <li><a href="{{ route('login') }}" class="active">Login</a></li> -->
-
                 <li><a href="{{url ('/')}}">Início</a></li>
                 <li><a href="{{url ('sobrenos')}}">Sobre Nós</a></li>
                 <li><a href="{{url ('servicos')}}">Serviços</a></li>
                 <li><a href="{{url ('contato')}}">Contato</a></li>
                 <li><a href="{{url ('formulario')}}">Formulário Pet</a></li>
-                <li><a href="{{url ('login')}}" class="active">Login</a></li>
-
             </ul>
+            @auth
+                @php
+                    $user = Auth::user();
+                    $firstPet = $user->pets()->first();
+                @endphp
+                <div class="user-menu">
+                    <div class="user-icon">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="user-menu-dropdown">
+                        <div class="user-menu-info">
+                            <p><strong>{{ $user->nome }}</strong></p>
+                            <span>ID: {{ $user->id }}</span>
+                            @if($firstPet)
+                                <span><i class="fas fa-paw"></i> Pet: {{ $firstPet->nome_pet }}</span>
+                            @else
+                                <span><i class="fas fa-paw"></i> Nenhum pet cadastrado</span>
+                            @endif
+                        </div>
+                        <div class="user-menu-actions">
+                            <form action="{{ route('logout') }}" method="POST">
+                                @csrf
+                                <button type="submit">
+                                    <i class="fas fa-sign-out-alt"></i>
+                                    Sair
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            @else
+                <a href="{{ route('login') }}" class="login-icon-link active" title="Login">
+                    <i class="fas fa-user"></i>
+                </a>
+            @endauth
             <div class="hamburger">
                 <span></span>
                 <span></span>

@@ -22,8 +22,42 @@ $currentPage = 'contato';
                 <li><a href="{{url ('servicos')}}">Serviços</a></li>
                 <li><a href="{{url ('contato')}}" class="active">Contato</a></li>
                 <li><a href="{{url ('formulario')}}">Formulário Pet</a></li>
-                <li><a href="{{url ('login')}}">Login</a></li>
             </ul>
+            @auth
+                @php
+                    $user = Auth::user();
+                    $firstPet = $user->pets()->first();
+                @endphp
+                <div class="user-menu">
+                    <div class="user-icon">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="user-menu-dropdown">
+                        <div class="user-menu-info">
+                            <p><strong>{{ $user->nome }}</strong></p>
+                            <span>ID: {{ $user->id }}</span>
+                            @if($firstPet)
+                                <span><i class="fas fa-paw"></i> Pet: {{ $firstPet->nome_pet }}</span>
+                            @else
+                                <span><i class="fas fa-paw"></i> Nenhum pet cadastrado</span>
+                            @endif
+                        </div>
+                        <div class="user-menu-actions">
+                            <form action="{{ route('logout') }}" method="POST">
+                                @csrf
+                                <button type="submit">
+                                    <i class="fas fa-sign-out-alt"></i>
+                                    Sair
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            @else
+                <a href="#" class="login-icon-link" title="Login" onclick="event.preventDefault(); openLoginModal();">
+                    <i class="fas fa-user"></i>
+                </a>
+            @endauth
             <div class="hamburger">
                 <span></span>
                 <span></span>
@@ -232,7 +266,110 @@ $currentPage = 'contato';
 
     </footer>
 </b>
+    <!-- Modal de Login -->
+    <div id="loginModal" class="login-modal">
+        <div class="login-modal-content">
+            <div class="login-modal-header">
+                <h2><i class="fas fa-user"></i> Login</h2>
+                <button type="button" class="login-modal-close" onclick="closeLoginModal()">&times;</button>
+            </div>
+            <div class="login-modal-body">
+                @if(session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
+
+                @if($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
+                <form class="login-form" id="loginModalForm" action="{{ route('login.submit') }}" method="POST">
+                    @csrf
+                    
+                    <div class="form-group">
+                        <label for="modal_email">E-mail *</label>
+                        <input type="email" id="modal_email" name="email" value="{{ old('email') }}" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="modal_password">Senha *</label>
+                        <div class="password-input">
+                            <input type="password" id="modal_password" name="password" required>
+                            <button type="button" class="toggle-password">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="form-options">
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="remember">
+                            <span class="checkmark"></span>
+                            Lembrar de mim
+                        </label>
+                        <a href="{{ route('password.request') }}" class="forgot-password">Esqueceu a senha?</a>
+                    </div>
+                    
+                    <button type="submit" class="login-btn">
+                        <i class="fas fa-sign-in-alt"></i> Entrar
+                    </button>
+                </form>
+            </div>
+            <div class="login-modal-footer">
+                <p>Não tem uma conta? <a href="{{ route('cadastro') }}">Cadastre-se aqui</a></p>
+            </div>
+        </div>
+    </div>
+
     <script src="{{url ('js/script.js')}}"></script>
+    <script>
+        function openLoginModal() {
+            document.getElementById('loginModal').classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLoginModal() {
+            document.getElementById('loginModal').classList.remove('show');
+            document.body.style.overflow = 'auto';
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('loginModal');
+            if (event.target == modal) {
+                closeLoginModal();
+            }
+        }
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeLoginModal();
+            }
+        });
+
+        document.querySelectorAll('#loginModal .toggle-password').forEach(button => {
+            button.addEventListener('click', function() {
+                const passwordInput = this.previousElementSibling;
+                const icon = this.querySelector('i');
+                
+                if (passwordInput.type === 'password') {
+                    passwordInput.type = 'text';
+                    icon.classList.remove('fa-eye');
+                    icon.classList.add('fa-eye-slash');
+                } else {
+                    passwordInput.type = 'password';
+                    icon.classList.remove('fa-eye-slash');
+                    icon.classList.add('fa-eye');
+                }
+            });
+        });
+    </script>
     <script>
 function sendToWhatsApp() {
     // Pegar os valores dos campos

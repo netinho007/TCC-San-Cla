@@ -31,4 +31,10 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+
+    // Relação com pets
+    public function pets()
+    {
+        return $this->hasMany(Pet::class);
+    }
 }
